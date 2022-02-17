@@ -24,10 +24,14 @@ btnIncExp.addEventListener("click", (e) => {
   initialActions(e);
 
   // Validate inputs
-  validateInput(incomeInput, "Income should be a number and greater than 0", 1);
-  validateInput(foodInput, "food cost should be a number");
-  validateInput(rentInput, "food cost should be a number");
-  validateInput(clothesInput, "clothes cost should be a number");
+  validateInput(
+    incomeInput,
+    "Income should be a positive number and greater than 0",
+    1
+  );
+  validateInput(foodInput, "food cost should be a positive number");
+  validateInput(rentInput, "rend cost should be a positive number");
+  validateInput(clothesInput, "clothes cost should be a positive number");
 
   // return if there is an error
   if (Object.keys(errors).length > 0) return displayErrorsThenClearErrors();
@@ -62,7 +66,7 @@ btnSaving.addEventListener("click", (e) => {
   // validate input
   validateInput(
     savingInput,
-    "Saving Percent should be a number, and less than or equal to 100",
+    "Saving Percent should be a positive number, and less than or equal to 100",
     0,
     100
   );
