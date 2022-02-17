@@ -17,6 +17,7 @@ const remainingBalance = document.getElementById("remaining-balance");
 
 // Global Vars
 let balanceValue = 0;
+let errors = {};
 
 ///// Calculate Balance with Income and Expenses /////
 btnIncExp.addEventListener("click", (e) => {
@@ -29,6 +30,17 @@ btnIncExp.addEventListener("click", (e) => {
   const rentInputValue = parseInt(rentInput.value);
   const clothesInputValue = parseInt(clothesInput.value);
 
+  console.log(parseInt(incomeInput.value));
+  console.log(typeof parseInt(incomeInput.value));
+  validateInput(
+    incomeInput,
+    "Income should be greater than 0 and type number",
+    1
+  );
+  validateInput(foodInput, "food cost should be a number");
+  validateInput(rentInput, "food cost should be a number");
+  validateInput(clothesInput, "clothes cost should be a number");
+
   // Total Expenses
   const totalExpValue = foodInputValue + rentInputValue + clothesInputValue;
   // Displaying total expenses on UI
@@ -38,6 +50,13 @@ btnIncExp.addEventListener("click", (e) => {
   balanceValue = incomeInputValue - totalExpValue;
   // Displaying balance on UI
   balance.innerText = balanceValue;
+
+  // Display  errors
+  const p = document.getElementById(incomeInput.id)
+  console.log(p);
+  
+  // Clear Errors
+  clearErrors();
 });
 
 ///// Calculate Saving with balance and saving percentage /////
@@ -61,3 +80,21 @@ btnSaving.addEventListener("click", (e) => {
   // Display remaining balance amount on UI
   remainingBalance.innerText = remainingBalanceValue;
 });
+
+// validate input
+function validateInput(domInput, errorText, min = 0, max = Infinity) {
+  if (
+    isNaN(parseInt(domInput.value)) ||
+    parseInt(domInput.value) < min ||
+    parseInt(domInput.value) > max
+  ) {
+    errors[domInput.id] = errorText;
+  }
+}
+
+// clear all errors
+function clearErrors() {
+  for (const key in errors) {
+    delete errors[key];
+  }
+}
