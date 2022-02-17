@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculate and Save</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-300 p-10">
+    <div class="container bg-white mx-auto rounded-xl p-4">
+      <!-- Header starts -->
+      <header class="">
+        <h1 class="text-orange-600 text-center font-bold text-3xl mb-8">
+          Calculate and Save
+        </h1>
+      </header>
+      <!-- Header ends -->
+
+      <!-- Main starts -->
+      <main class="">
+        <div class="grid grid-cols-2 items-center">
+          <div>
+            <img class="w-full" src="./images/money.jpg" alt="" />
+          </div>
+          <div class="bg-gray-100 p-3 text-center rounded">
+            <!-- Income and Expense calculation block -->
+            <div class="inc-exp p-4">
+              <form action="" class="">
+                <!-- Income block -->
+                <div class="income-block">
+                  <h2 class="text-3xl font-semibold mb-4">Income</h2>
+                  <div
+                    class="input-group grid grid-cols-3 justify-items-end items-center"
+                  >
+                    <label for="income-input" class="text-xl mr-2"
+                      >Income:
+                    </label>
+                    <input
+                      id="income-input"
+                      type="text"
+                      class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
+                    />
+                  </div>
+                </div>
+                <!-- Expense Block -->
+                <div class="expense-block mt-8">
+                  <h2 class="text-3xl font-semibold mb-4">Expense</h2>
+                  <div
+                    class="input-group grid grid-cols-3 justify-items-end items-center mb-2"
+                  >
+                    <label for="food-input" class="text-xl mr-2">Food: </label>
+                    <input
+                      id="food-input"
+                      type="text"
+                      class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
+                    />
+                  </div>
+                  <div
+                    class="input-group grid grid-cols-3 justify-items-end items-center mb-2"
+                  >
+                    <label for="rent-input" class="text-xl mr-2">Rent: </label>
+                    <input
+                      id="rent-input"
+                      type="text"
+                      class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
+                    />
+                  </div>
+                  <div
+                    class="input-group grid grid-cols-3 justify-items-end items-center mb-2"
+                  >
+                    <label for="clothes-input" class="text-xl mr-2"
+                      >Clothes:
+                    </label>
+                    <input
+                      id="clothes-input"
+                      type="text"
+                      class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
+                    />
+                  </div>
+                </div>
+              </form>
+
+              <!-- Income Expenses Output -->
+              <div class="inc-exp-output">
+                <h2 class="total-exp-wrapper text-2xl font-semibold my-3">
+                  Total Expenses: <span class="total-exp">0</span>
+                </h2>
+                <h2 class="balance-exp-wrapper text-2xl font-semibold my-3">
+                  Balance: <span class="balance-exp">0</span>
+                </h2>
+              </div>
+            </div>
+            <!-- Money Saving block -->
+            <div class="saving">
+              <form action="" class="flex gap-3 justify-between">
+                <div
+                class="input-group grid grid-cols-2 justify-items-end items-center mb-2"
+              >
+                <label for="saving-input" class="text-xl mr-2"
+                  >saving:
+                </label>
+                <input
+                  id="saving-input"
+                  type="text"
+                  class="input outline-0 rounded p-2 w-full  focus:shadow-lg focus:shadow-blue-100"
+                />
+              </div>
+              <div class="self-center">%</div>
+              <button class="bg-green-500 text-white px-8 py-2 rounded-xl font-semibold tracking-wider uppercase">Save</button>
+              </form>
+
+              <!-- Saving Output -->
+              <div class="saving-output">
+                <h2 class="saving-amount-wrapper text-2xl font-semibold my-3">
+                  Saving Amount: <span id="saving-amount">0</span>
+                </h2>
+                <h2 class="remaining-balance-wrapper text-2xl font-semibold my-3">
+                  Remaining Balance: <span id="remaining-balance">0</span>
+                </h2>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- Main ends -->
+
+      <!-- Footer starts -->
+      <footer></footer>
+      <!-- Footer ends -->
+    </div>
+  </body>
+</html>
