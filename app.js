@@ -18,9 +18,10 @@ const errorDisplays = document.getElementsByClassName("error-display");
 
 // Global Vars
 let balanceValue = 0;
+let incomeInputValue = 0;
 let errors = {};
 
-///// Calculate Balance with Income and Expenses /////
+//////////// Calculate Balance with Income and Expenses //////////////
 btnIncExp.addEventListener("click", (e) => {
   // preventing default behavior
   e.preventDefault();
@@ -28,26 +29,19 @@ btnIncExp.addEventListener("click", (e) => {
   // clear error displays
   clearErrorDisplays();
 
-  // local vars
-  const incomeInputValue = parseInt(incomeInput.value);
-  const foodInputValue = parseInt(foodInput.value);
-  const rentInputValue = parseInt(rentInput.value);
-  const clothesInputValue = parseInt(clothesInput.value);
-
   validateInput(incomeInput, "Income should be a number and greater than 0", 1);
   validateInput(foodInput, "food cost should be a number");
   validateInput(rentInput, "food cost should be a number");
   validateInput(clothesInput, "clothes cost should be a number");
 
   // return if there is an error
-  if (Object.keys(errors).length > 0) {
-    // Display  errors
-    displayErrors();
+  if (Object.keys(errors).length > 0) return displayThenClearErrors();
 
-    // Clear Errors
-    clearErrors();
-    return;
-  }
+  // local vars
+  incomeInputValue = parseInt(incomeInput.value);
+  const foodInputValue = parseInt(foodInput.value);
+  const rentInputValue = parseInt(rentInput.value);
+  const clothesInputValue = parseInt(clothesInput.value);
 
   // Calculate total Expenses
   const totalExpValue = foodInputValue + rentInputValue + clothesInputValue;
@@ -57,43 +51,63 @@ btnIncExp.addEventListener("click", (e) => {
   // return if expenses is greater than income
   if (totalExpValue > incomeInputValue) {
     errors[incomeInput.id] = "Income should be greater than total Expenses";
-    // Display  errors
-    displayErrors();
-
-    // Clear Errors
-    clearErrors();
-    return;
+    return displayThenClearErrors();
   }
 
   // Displaying total expenses on UI
-  totalExp.innerText = totalExpValue;
+  totalExp.innerText = totalExpValue.toFixed(2);
   // Displaying balance on UI
-  balance.innerText = balanceValue;
+  balance.innerText = balanceValue.toFixed(2);
 });
 
-///// Calculate Saving with balance and saving percentage /////
+////////////// Calculate Saving with balance and saving percentage /////////////
 btnSaving.addEventListener("click", (e) => {
   // preventing default behavior
   e.preventDefault();
-
   // clear error displays
   clearErrorDisplays();
+
+  // validate input
+  validateInput(
+    savingInput,
+    "Saving Percent should be a number, and less than 100",
+    0,
+    99
+  );
+
+  // validate again in balance is 0 or less
+  if (balanceValue <= 0)
+    validateInput(savingInput, "Please calculate balance first");
+
+  // return if there is an error
+  if (Object.keys(errors).length > 0) return displayThenClearErrors();
 
   // local vars
   const savingInputValue = parseInt(savingInput.value);
 
   // calculating saving
   const savingPercent = savingInputValue / 100;
-  const savingAmountValue = balanceValue * savingPercent;
+  const savingAmountValue = incomeInputValue * savingPercent;
+  const availableSavingPercent = (balanceValue / incomeInputValue) * 100;
+
+  // return if saving amount more than the balance you have
+  if (savingAmountValue > balanceValue) {
+    errors[savingInput.id] = `You cannot save more than ${Math.floor(
+      availableSavingPercent
+    )} percent of your income`;
+
+    // return if there is an error
+    if (Object.keys(errors).length > 0) return displayThenClearErrors();
+  }
 
   // Calculate remaining Balance
   const remainingBalanceValue = balanceValue - savingAmountValue;
 
   // Display saving amount on UI
-  savingAmount.innerText = savingAmountValue;
+  savingAmount.innerText = savingAmountValue.toFixed(2);
 
   // Display remaining balance amount on UI
-  remainingBalance.innerText = remainingBalanceValue;
+  remainingBalance.innerText = remainingBalanceValue.toFixed(2);
 });
 
 // validate input
@@ -105,6 +119,15 @@ function validateInput(domInput, errorText, min = 0, max = Infinity) {
   ) {
     errors[domInput.id] = errorText;
   }
+}
+
+// display then clear errors
+function displayThenClearErrors() {
+  // Display  errors
+  displayErrors();
+
+  // Clear Errors
+  clearErrors();
 }
 
 // clear all errors
