@@ -9,11 +9,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body class="bg-gray-300 p-10">
+  <body class="bg-gray-300 p-0 sm:p-10">
     <div class="container bg-white mx-auto rounded-xl p-4">
       <!-- Header starts -->
       <header class="">
-        <h1 class="text-orange-600 text-center font-bold text-3xl mb-8">
+        <h1 class="text-orange-600 text-center font-bold text-4xl mt-4 mb-8">
           Calculate and Save
         </h1>
       </header>
@@ -21,11 +21,11 @@
 
       <!-- Main starts -->
       <main class="">
-        <div class="grid grid-cols-2 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center">
           <div>
             <img class="w-full" src="./images/money.jpg" alt="" />
           </div>
-          <div class="bg-gray-100 p-3 text-center rounded">
+          <div class="bg-gray-100 p-0 sm:0-3 text-center rounded">
             <!-- Income and Expense calculation block -->
             <div class="inc-exp p-4">
               <form action="" class="">
@@ -81,6 +81,13 @@
                     />
                   </div>
                 </div>
+                <button
+                  id="btn-inc-exp"
+                  type="submit"
+                  class="my-3 bg-green-500 text-white px-8 py-2 rounded-xl font-bold tracking-wider uppercase w-40"
+                >
+                  Calculate
+                </button>
               </form>
 
               <!-- Income Expenses Output -->
@@ -93,23 +100,32 @@
                 </h2>
               </div>
             </div>
+
+            <hr class="mb-8" />
+
             <!-- Money Saving block -->
             <div class="saving">
               <form action="" class="flex gap-3 justify-between">
                 <div
-                class="input-group grid grid-cols-2 justify-items-end items-center mb-2"
-              >
-                <label for="saving-input" class="text-xl mr-2"
-                  >saving:
-                </label>
-                <input
-                  id="saving-input"
-                  type="text"
-                  class="input outline-0 rounded p-2 w-full  focus:shadow-lg focus:shadow-blue-100"
-                />
-              </div>
-              <div class="self-center">%</div>
-              <button class="bg-green-500 text-white px-8 py-2 rounded-xl font-semibold tracking-wider uppercase">Save</button>
+                  class="input-group grid grid-cols-2 justify-items-end items-center mb-2"
+                >
+                  <label for="saving-input" class="text-xl mr-2"
+                    >saving:
+                  </label>
+                  <input
+                    id="saving-input"
+                    type="text"
+                    class="input outline-0 rounded p-2 w-full focus:shadow-lg focus:shadow-blue-100"
+                  />
+                </div>
+                <div class="self-center">%</div>
+                <button
+                  id="btn-saving"
+                  type="submit"
+                  class="bg-green-500 text-white px-8 py-2 rounded-xl font-semibold tracking-wider uppercase w-60"
+                >
+                  Save
+                </button>
               </form>
 
               <!-- Saving Output -->
@@ -117,11 +133,12 @@
                 <h2 class="saving-amount-wrapper text-2xl font-semibold my-3">
                   Saving Amount: <span id="saving-amount">0</span>
                 </h2>
-                <h2 class="remaining-balance-wrapper text-2xl font-semibold my-3">
+                <h2
+                  class="remaining-balance-wrapper text-2xl font-semibold my-3"
+                >
                   Remaining Balance: <span id="remaining-balance">0</span>
                 </h2>
               </div>
-            </div>
             </div>
           </div>
         </div>
