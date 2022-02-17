@@ -14,6 +14,7 @@ const totalExp = document.getElementById("total-exp");
 const balance = document.getElementById("balance");
 const savingAmount = document.getElementById("saving-amount");
 const remainingBalance = document.getElementById("remaining-balance");
+const errorDisplays = document.getElementsByClassName("error-display");
 
 // Global Vars
 let balanceValue = 0;
@@ -24,14 +25,15 @@ btnIncExp.addEventListener("click", (e) => {
   // preventing default behavior
   e.preventDefault();
 
+  // clear error displays
+  clearErrorDisplays();
+
   // local vars
   const incomeInputValue = parseInt(incomeInput.value);
   const foodInputValue = parseInt(foodInput.value);
   const rentInputValue = parseInt(rentInput.value);
   const clothesInputValue = parseInt(clothesInput.value);
 
-  console.log(parseInt(incomeInput.value));
-  console.log(typeof parseInt(incomeInput.value));
   validateInput(
     incomeInput,
     "Income should be greater than 0 and type number",
@@ -40,6 +42,23 @@ btnIncExp.addEventListener("click", (e) => {
   validateInput(foodInput, "food cost should be a number");
   validateInput(rentInput, "food cost should be a number");
   validateInput(clothesInput, "clothes cost should be a number");
+
+  // return if there is an error
+  if (Object.keys(errors).length > 0) {
+    // Display  errors
+    for (const err in errors) {
+      // console.log(err);
+      const target = document.getElementById(err + "-error");
+      // show error
+      target.classList.remove("hidden");
+      // push error text
+      target.innerText = errors[err];
+    }
+
+    // Clear Errors
+    clearErrors();
+    return;
+  }
 
   // Total Expenses
   const totalExpValue = foodInputValue + rentInputValue + clothesInputValue;
@@ -50,19 +69,15 @@ btnIncExp.addEventListener("click", (e) => {
   balanceValue = incomeInputValue - totalExpValue;
   // Displaying balance on UI
   balance.innerText = balanceValue;
-
-  // Display  errors
-  const p = document.getElementById(incomeInput.id)
-  console.log(p);
-  
-  // Clear Errors
-  clearErrors();
 });
 
 ///// Calculate Saving with balance and saving percentage /////
 btnSaving.addEventListener("click", (e) => {
   // preventing default behavior
   e.preventDefault();
+
+  // clear error displays
+  clearErrorDisplays();
 
   // local vars
   const savingInputValue = parseInt(savingInput.value);
@@ -97,4 +112,15 @@ function clearErrors() {
   for (const key in errors) {
     delete errors[key];
   }
+}
+
+// clear all dom error display
+function clearErrorDisplays() {
+  for (const ed of errorDisplays) {
+    ed.classList.add("hidden");
+  }
+}
+
+function insertAfter(referenceNode, newNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }

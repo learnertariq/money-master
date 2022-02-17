@@ -44,6 +44,13 @@
                       class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
                     />
                   </div>
+                  <!-- error display -->
+                  <p
+                    id="income-input-error"
+                    class="error-display font-bold text-red-600 hidden"
+                  >
+                    Error
+                  </p>
                 </div>
                 <!-- Expense Block -->
                 <div class="expense-block mt-8">
@@ -58,6 +65,14 @@
                       class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
                     />
                   </div>
+                  <!-- error display -->
+                  <p
+                    id="food-input-error"
+                    class="error-display font-bold text-red-600 hidden"
+                  >
+                    Error
+                  </p>
+
                   <div
                     class="input-group grid grid-cols-3 justify-items-end items-center mb-2"
                   >
@@ -68,6 +83,14 @@
                       class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
                     />
                   </div>
+                  <!-- error display -->
+                  <p
+                    id="rent-input-error"
+                    class="error-display font-bold text-red-600 hidden"
+                  >
+                    Error
+                  </p>
+
                   <div
                     class="input-group grid grid-cols-3 justify-items-end items-center mb-2"
                   >
@@ -80,8 +103,14 @@
                       class="input outline-0 rounded p-2 w-full col-span-2 focus:shadow-lg focus:shadow-blue-100"
                     />
                   </div>
+                  <!-- error display -->
+                  <p
+                    id="clothes-input-error"
+                    class="error-display font-bold text-red-600 hidden"
+                  >
+                    Error
+                  </p>
                 </div>
-                <p id='error-display' class='font-bold text-red-600 hidden'>Error</p>
                 <button
                   id="btn-inc-exp"
                   type="submit"
@@ -106,27 +135,36 @@
 
             <!-- Money Saving block -->
             <div class="saving">
-              <form action="" class="flex gap-3 justify-between">
-                <div
-                  class="input-group grid grid-cols-2 justify-items-end items-center mb-2"
-                >
-                  <label for="saving-input" class="text-xl mr-2"
-                    >saving:
-                  </label>
-                  <input
-                    id="saving-input"
-                    type="text"
-                    class="input outline-0 rounded p-2 w-full focus:shadow-lg focus:shadow-blue-100"
-                  />
+              <form action="" class="">
+                <div class="container flex gap-3 justify-between">
+                  <div
+                    class="input-group grid grid-cols-2 justify-items-end items-center mb-2"
+                  >
+                    <label for="saving-input" class="text-xl mr-2"
+                      >saving:
+                    </label>
+                    <input
+                      id="saving-input"
+                      type="text"
+                      class="input outline-0 rounded p-2 w-full focus:shadow-lg focus:shadow-blue-100"
+                    />
+                  </div>
+                  <div class="self-center">%</div>
+                  <button
+                    id="btn-saving"
+                    type="submit"
+                    class="bg-green-500 text-white px-8 py-2 rounded-xl font-semibold tracking-wider uppercase w-60"
+                  >
+                    Save
+                  </button>
                 </div>
-                <div class="self-center">%</div>
-                <button
-                  id="btn-saving"
-                  type="submit"
-                  class="bg-green-500 text-white px-8 py-2 rounded-xl font-semibold tracking-wider uppercase w-60"
+                <!-- error display -->
+                <p
+                  id="saving-input-error"
+                  class="error-display font-bold text-red-600 hidden"
                 >
-                  Save
-                </button>
+                  Error
+                </p>
               </form>
 
               <!-- Saving Output -->
