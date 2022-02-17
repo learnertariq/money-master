@@ -34,11 +34,7 @@ btnIncExp.addEventListener("click", (e) => {
   const rentInputValue = parseInt(rentInput.value);
   const clothesInputValue = parseInt(clothesInput.value);
 
-  validateInput(
-    incomeInput,
-    "Income should be greater than 0 and type number",
-    1
-  );
+  validateInput(incomeInput, "Income should be a number and greater than 0", 1);
   validateInput(foodInput, "food cost should be a number");
   validateInput(rentInput, "food cost should be a number");
   validateInput(clothesInput, "clothes cost should be a number");
@@ -46,27 +42,31 @@ btnIncExp.addEventListener("click", (e) => {
   // return if there is an error
   if (Object.keys(errors).length > 0) {
     // Display  errors
-    for (const err in errors) {
-      // console.log(err);
-      const target = document.getElementById(err + "-error");
-      // show error
-      target.classList.remove("hidden");
-      // push error text
-      target.innerText = errors[err];
-    }
+    displayErrors();
 
     // Clear Errors
     clearErrors();
     return;
   }
 
-  // Total Expenses
+  // Calculate total Expenses
   const totalExpValue = foodInputValue + rentInputValue + clothesInputValue;
+  // Calculate total Balance
+  balanceValue = incomeInputValue - totalExpValue;
+
+  // return if expenses is greater than income
+  if (totalExpValue > incomeInputValue) {
+    errors[incomeInput.id] = "Income should be greater than total Expenses";
+    // Display  errors
+    displayErrors();
+
+    // Clear Errors
+    clearErrors();
+    return;
+  }
+
   // Displaying total expenses on UI
   totalExp.innerText = totalExpValue;
-
-  // Calculating Balance
-  balanceValue = incomeInputValue - totalExpValue;
   // Displaying balance on UI
   balance.innerText = balanceValue;
 });
@@ -111,6 +111,18 @@ function validateInput(domInput, errorText, min = 0, max = Infinity) {
 function clearErrors() {
   for (const key in errors) {
     delete errors[key];
+  }
+}
+
+// display errors in dom
+function displayErrors() {
+  for (const err in errors) {
+    // console.log(err);
+    const target = document.getElementById(err + "-error");
+    // show error
+    target.classList.remove("hidden");
+    // push error text
+    target.innerText = errors[err];
   }
 }
 
