@@ -71,10 +71,9 @@ btnSaving.addEventListener("click", (e) => {
     100
   );
 
-  // validate again in balance is 0 or less
-  if (balanceValue <= 0) {
-    validateInput(savingInput, "You cannot save when your balance is zero");
-  }
+  // throw an error when balance is 0 or less
+  if (balanceValue <= 0)
+    errors[savingInput.id] = "You cannot save when your balance is zero";
 
   // return if there is an error
   if (Object.keys(errors).length > 0) return displayErrorsThenClearErrors();
